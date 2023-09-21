@@ -56,23 +56,33 @@ public class CurrencyConverter {
 		
 	}
 	
-	// Para hacer la conversion llamar a este metodo.
+	private CurrencyData lastCurrencyData = null;
 	
-	public double doConvertion(String from, String to, double amount) {
-		CurrencyConverter converter = new CurrencyConverter();
-		CurrencyData currencyData = converter.getCurrencyData();
-		
-		if (currencyData != null) {
-			Map<String, Double> rates = currencyData.getRates();
-			double fromCurrency = rates.get(from);
-			double toCurrency = rates.get(to);
-			double convertedAmount = amount / fromCurrency * toCurrency;
-			
-			return convertedAmount;
-		} else {
-			return amount;
-		}
-	}
+	// Para hacer la conversion llamar a este metodo.
+	// UseCachedRated true para online, false para conversiones offline
+	public double doConvertion(String from, String to, double amount, boolean useCachedRates) {
+        if (useCachedRates && lastCurrencyData != null) {
+            Map<String, Double> rates = lastCurrencyData.getRates();
+            double fromCurrency = rates.get(from);
+            double toCurrency = rates.get(to);
+            double convertedAmount = amount / fromCurrency * toCurrency;
+            return convertedAmount;
+        } else {
+            // Si no se especifica usar las tasas en caché o no hay datos en caché,
+            // realiza una solicitud para obtener las tasas actualizadas.
+            lastCurrencyData = getCurrencyData();
+
+            if (lastCurrencyData != null) {
+                Map<String, Double> rates = lastCurrencyData.getRates();
+                double fromCurrency = rates.get(from);
+                double toCurrency = rates.get(to);
+                double convertedAmount = amount / fromCurrency * toCurrency;
+                return convertedAmount;
+            } else {
+                return amount;
+            }
+        }
+    }
 	
 	/*public static void main(String[] args) {
 		String from = "USD";

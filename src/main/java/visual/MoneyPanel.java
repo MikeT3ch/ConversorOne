@@ -16,6 +16,9 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JToggleButton;
+import java.awt.Choice;
+import javax.swing.JCheckBox;
 
 public class MoneyPanel extends JPanel {
 	private JTextField txtInputMoney;
@@ -47,15 +50,18 @@ public class MoneyPanel extends JPanel {
 		moneyPane.setBounds(new Rectangle(0, 0, 600, 320));
 		add(moneyPane);
 		
+		final JCheckBox chckbxUsarModoOffline = new JCheckBox("Usar modo offline");
+		
 		JButton btnConvertirMoney = new JButton("Convertir");
 		btnConvertirMoney.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String from = String.valueOf(combBoxInputMoney.getSelectedItem());
 				String to = String.valueOf(combBoxOutMoney.getSelectedItem());
 				double amount = Double.parseDouble(txtInputMoney.getText());
+				Boolean offline = chckbxUsarModoOffline.isSelected();
 				
 				CurrencyConverter converter = new CurrencyConverter();
-				double answer = converter.doConvertion(from, to, amount);
+				double answer = converter.doConvertion(from, to, amount, offline);
 				textOutMoney.setText(String.format("%.2f" ,answer));
 			}
 		});
@@ -67,41 +73,50 @@ public class MoneyPanel extends JPanel {
 		gl_moneyPane.setHorizontalGroup(
 			gl_moneyPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_moneyPane.createSequentialGroup()
-					.addGap(131)
-					.addComponent(combBoxInputMoney, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addComponent(txtInputMoney, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-				.addGroup(gl_moneyPane.createSequentialGroup()
-					.addGap(186)
-					.addComponent(lblTest, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE))
-				.addGroup(gl_moneyPane.createSequentialGroup()
-					.addGap(131)
-					.addComponent(combBoxOutMoney, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addComponent(textOutMoney, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-				.addGroup(gl_moneyPane.createSequentialGroup()
-					.addGap(239)
-					.addComponent(btnConvertirMoney, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE))
+					.addGap(149)
+					.addGroup(gl_moneyPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_moneyPane.createSequentialGroup()
+							.addComponent(combBoxOutMoney, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addComponent(textOutMoney, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_moneyPane.createSequentialGroup()
+							.addComponent(combBoxInputMoney, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addComponent(txtInputMoney, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_moneyPane.createSequentialGroup()
+							.addGap(55)
+							.addComponent(lblTest, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, 117, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
+							.addComponent(chckbxUsarModoOffline)))
+					.addContainerGap())
+				.addGroup(Alignment.TRAILING, gl_moneyPane.createSequentialGroup()
+					.addContainerGap(268, Short.MAX_VALUE)
+					.addComponent(btnConvertirMoney, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE)
+					.addGap(210))
 		);
 		gl_moneyPane.setVerticalGroup(
 			gl_moneyPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_moneyPane.createSequentialGroup()
-					.addGap(94)
+					.addGap(66)
 					.addGroup(gl_moneyPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_moneyPane.createSequentialGroup()
 							.addGap(1)
 							.addComponent(combBoxInputMoney, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 						.addComponent(txtInputMoney, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(18)
-					.addComponent(lblTest)
-					.addGap(18)
+					.addGroup(gl_moneyPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblTest)
+						.addComponent(chckbxUsarModoOffline))
+					.addGap(30)
 					.addGroup(gl_moneyPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_moneyPane.createSequentialGroup()
 							.addGap(1)
 							.addComponent(combBoxOutMoney, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 						.addComponent(textOutMoney, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addComponent(btnConvertirMoney, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))
+					.addGap(33)
+					.addComponent(btnConvertirMoney, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(70, Short.MAX_VALUE))
 		);
 		moneyPane.setLayout(gl_moneyPane);
 
