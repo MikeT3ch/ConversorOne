@@ -2,7 +2,7 @@
 Conversor de divisas y temperatura, otros tipos de unidades de medida seran añadidos en versiones futuras.
 
 ## Screenshots
-
+![MainView](./screenshots/MainView.png) 
 
 # TO-DO
 - [ ] Terminar este README.
