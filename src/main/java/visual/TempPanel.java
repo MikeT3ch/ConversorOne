@@ -13,6 +13,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 @SuppressWarnings("serial")
 public class TempPanel extends JPanel {
@@ -30,7 +31,9 @@ public class TempPanel extends JPanel {
 		tempPane.setBounds(0, 0, 600, 320);
 		add(tempPane);
 		
-		JLabel lblTo = new JLabel("To:");
+		final JLabel lblTo = new JLabel("To:");
+		final JLabel lblLblerror = new JLabel("");
+		lblLblerror.setForeground(new Color(252, 72, 79));
 		
 		inputTemp = new JTextField();
 		inputTemp.setColumns(10);
@@ -49,43 +52,55 @@ public class TempPanel extends JPanel {
 		JButton btnConvertirTemp = new JButton("Convertir");
 		btnConvertirTemp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String unit = combBoxInputTemp.getSelectedItem() + "to" + combBoxOutTemp.getSelectedItem();
-				double temp = Double.parseDouble(inputTemp.getText());
-				
-				TempConverter2 converter = new TempConverter2();
-				double answer = converter.doTempConvert(temp, unit);
-				outputTemp.setText(String.valueOf(String.format("%.2f", answer)));
+				try {
+					String unit = combBoxInputTemp.getSelectedItem() + "to" + combBoxOutTemp.getSelectedItem();
+					double temp = Double.parseDouble(inputTemp.getText());
+					
+					TempConverter2 converter = new TempConverter2();
+					double answer = converter.doTempConvert(temp, unit);
+					outputTemp.setText(String.valueOf(String.format("%.2f", answer)));
+				} catch (Exception e) {
+					e.printStackTrace();
+					System.out.println("No es un numero valido");
+					lblLblerror.setText("Numero invalido");
+				}
 			}
 		});
 		btnConvertirTemp.setBorderPainted(false);
+		
+		
 		
 		
 		GroupLayout gl_tempPane = new GroupLayout(tempPane);
 		gl_tempPane.setHorizontalGroup(
 			gl_tempPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_tempPane.createSequentialGroup()
-					.addGap(184)
+					.addGap(185)
 					.addGroup(gl_tempPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_tempPane.createParallelGroup(Alignment.LEADING)
+							.addGroup(gl_tempPane.createSequentialGroup()
+								.addComponent(combBoxInputTemp, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+								.addGap(18)
+								.addComponent(inputTemp, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addGroup(gl_tempPane.createSequentialGroup()
+								.addGap(55)
+								.addComponent(lblTo))
+							.addGroup(gl_tempPane.createSequentialGroup()
+								.addComponent(combBoxOutTemp, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+								.addGap(18)
+								.addComponent(outputTemp, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addGroup(gl_tempPane.createSequentialGroup()
+								.addGap(108)
+								.addComponent(btnConvertirTemp, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE)))
 						.addGroup(gl_tempPane.createSequentialGroup()
-							.addComponent(combBoxInputTemp, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(inputTemp, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_tempPane.createSequentialGroup()
-							.addGap(55)
-							.addComponent(lblTo))
-						.addGroup(gl_tempPane.createSequentialGroup()
-							.addComponent(combBoxOutTemp, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(outputTemp, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_tempPane.createSequentialGroup()
-							.addGap(108)
-							.addComponent(btnConvertirTemp, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(186, Short.MAX_VALUE))
+							.addGap(95)
+							.addComponent(lblLblerror)))
+					.addContainerGap(185, Short.MAX_VALUE))
 		);
 		gl_tempPane.setVerticalGroup(
 			gl_tempPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_tempPane.createSequentialGroup()
-					.addGap(68)
+				.addGroup(Alignment.TRAILING, gl_tempPane.createSequentialGroup()
+					.addContainerGap(68, Short.MAX_VALUE)
 					.addGroup(gl_tempPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_tempPane.createSequentialGroup()
 							.addGap(1)
@@ -101,7 +116,9 @@ public class TempPanel extends JPanel {
 						.addComponent(outputTemp, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(18)
 					.addComponent(btnConvertirTemp)
-					.addContainerGap(94, Short.MAX_VALUE))
+					.addGap(38)
+					.addComponent(lblLblerror)
+					.addGap(39))
 		);
 		tempPane.setLayout(gl_tempPane);
 
