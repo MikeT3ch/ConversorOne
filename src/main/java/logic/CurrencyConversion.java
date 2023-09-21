@@ -7,6 +7,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import com.google.gson.Gson;
 import java.util.Map;
+import java.util.Locale;
 
 public class CurrencyConversion {
 	double inputMoney, outputMoney;
@@ -19,7 +20,7 @@ public class CurrencyConversion {
 	public CurrencyData getCurrencyData() {
 		try {
 			// String con la url
-			String urlString = API_BASE_URL + ENDPOINT + "?access_key=" + ACCESS_KEY + "&symbols=COP,EUR";
+			String urlString = API_BASE_URL + ENDPOINT + "?access_key=" + ACCESS_KEY + "&symbols=COP,EUR,USD";
 			
 			// Conversion a URL para acceder a metodos propios de URL
 			URL url = new URL(urlString);
@@ -65,29 +66,19 @@ public class CurrencyConversion {
 			double fromCurrency = rates.get(from);
 			double toCurrency = rates.get(to);
 			double convertedAmount = amount / fromCurrency * toCurrency;
+			
 			return convertedAmount;
 		} else {
 			return amount;
 		}
 	}
-	/*
-	public static void main(String[] args) {
-        CurrencyConversion converter = new CurrencyConversion();
-        CurrencyData currencyData = converter.getCurrencyData();
-
-        if (currencyData != null) {
-            // Ahora puedes acceder a la propiedad "rates" y realizar cálculos con sus valores
-            Map<String, Double> rates = currencyData.getRates();
-            double copRate = rates.get("COP");
-            double eurRate = rates.get("EUR");
-
-            // Ejemplo de cálculo
-            double amountInCOP = 5000.0;
-            double convertedAmount = amountInCOP / copRate * eurRate;
-
-            System.out.println("COP to EUR: " + convertedAmount);
-        } else {
-            System.out.println("Error al obtener los datos.");
-        }
-    } */
+	
+	/*public static void main(String[] args) {
+		String from = "USD";
+		String to = "COP";
+		double amount = 5.0;
+		CurrencyConversion testConversion = new CurrencyConversion();
+		double answer = testConversion.doConvertion(from, to, amount);
+		System.out.println(String.format("%.2f", answer));  
+	}*/
 }
