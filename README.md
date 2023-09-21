@@ -1,6 +1,14 @@
 # Conversor ONE
 Conversor de divisas y temperatura, otros tipos de unidades de medida seran añadidos en versiones futuras.
 
+## Intrucciones de Uso:
+Descarga la ultima version del archivo .jar en Releases.
+El conversor consta de unos botones al lado izquierdo de la ventana, los cuales cambian el tipo de conversion que queremos usar (Divisas, temperatura, ...).
+
+El conversor de divisas cuanta con un checkbox que activa el modo offline, este modo carga los rates de las monedas almacenados en cache, perteneciendo a la ultima consulta en online.
+
+El conversor de temperaturas no necesita una conexión a internet.
+
 ## Screenshots
 ### Ventana principal:
 ![MainView](./screenshots/MainView.png) 
@@ -20,14 +28,6 @@ Conversor de divisas y temperatura, otros tipos de unidades de medida seran aña
 ### Validacion de Input:
 ![InvalidInput](./screenshots/InvalidInput.png)
 ---
-
-## Intrucciones de Uso:
-Descarga la ultima version del archivo .jar en Releases.
-El conversor consta de unos botones al lado izquierdo de la ventana, los cuales cambian el tipo de conversion que queremos usar (Divisas, temperatura, ...).
-
-El conversor de divisas cuanta con un checkbox que activa el modo offline, este modo carga los rates de las monedas almacenados en cache, perteneciendo a la ultima consulta en online.
-
-El conversor de temperaturas no necesita una conexión a internet.
 
 # TO-DO
 - [ ] Terminar este README.
