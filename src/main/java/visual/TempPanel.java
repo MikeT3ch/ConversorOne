@@ -7,7 +7,6 @@ import javax.swing.JTextField;
 
 import logic.TempConverter2;
 
-import java.awt.Dimension;
 import javax.swing.JButton;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -15,6 +14,7 @@ import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+@SuppressWarnings("serial")
 public class TempPanel extends JPanel {
 	private JTextField inputTemp;
 	private JTextField outputTemp;
@@ -22,6 +22,7 @@ public class TempPanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public TempPanel() {
 		setLayout(null);
 		

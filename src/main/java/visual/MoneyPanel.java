@@ -7,7 +7,6 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import java.awt.Dimension;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import logic.CurrencyConverter;
@@ -16,10 +15,9 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JToggleButton;
-import java.awt.Choice;
 import javax.swing.JCheckBox;
 
+@SuppressWarnings("serial")
 public class MoneyPanel extends JPanel {
 	private JTextField txtInputMoney;
 	private JTextField textOutMoney;
@@ -27,6 +25,7 @@ public class MoneyPanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public MoneyPanel() {
 		setLayout(null);
 		

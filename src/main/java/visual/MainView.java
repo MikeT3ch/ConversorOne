@@ -5,36 +5,27 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.SwingPropertyChangeSupport;
-
-import org.w3c.dom.events.EventTarget;
-
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialLighterIJTheme;
 import java.awt.GridLayout;
-import javax.swing.BoxLayout;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.FlowLayout;
 import javax.swing.SpringLayout;
 import javax.swing.UIManager;
-import javax.swing.ViewportLayout;
 
 import java.awt.Dimension;
-import java.awt.Rectangle;
 import javax.swing.JLabel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.Font;
 
-public class principal extends JFrame {
+@SuppressWarnings("serial")
+public class MainView extends JFrame {
 
 	private JPanel contentPane;
 
@@ -54,7 +45,7 @@ public class principal extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					principal frame = new principal();
+					MainView frame = new MainView();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -68,7 +59,7 @@ public class principal extends JFrame {
 	 */
 	JPanel viewsPanel = new JPanel();
 	int xMouse, yMouse;
-	public principal() {
+	public MainView() {
 		
 		setUndecorated(true);
 		setResizable(false);
