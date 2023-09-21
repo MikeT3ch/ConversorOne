@@ -4,6 +4,18 @@ Conversor de divisas y temperatura, otros tipos de unidades de medida seran aña
 ## Screenshots
 ![MainView](./screenshots/MainView.png) 
 
+---
+![CurrencyOptions](./screenshots/CurrencyOptions.png)
+---
+![OfflineExample](./screenshots/OfflineExample.png)
+---
+![TemperatureView](./screenshots/TemperatureView.png)
+---
+![TempOptions](./screenshots/TempOptions.png)
+---
+![InvalidInput](./screenshots/InvalidInput.png)
+
+
 # TO-DO
 - [ ] Terminar este README.
 - [ ] Agregar instrucciones de uso.
