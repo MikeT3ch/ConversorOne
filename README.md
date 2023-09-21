@@ -1,11 +1,14 @@
 # Conversor ONE
-Conversor de divisas, temperatura y otros tipos de unidades de medida.
+Conversor de divisas y temperatura, otros tipos de unidades de medida seran añadidos en versiones futuras.
+
+## Screenshots
+
 
 # TO-DO
 - [ ] Terminar este README.
 - [ ] Agregar instrucciones de uso.
 - [ ] Screnshots del programa.
-- [ ] Logica de conversion de divisas offline
-- [ ] Logica de conversion de divisas online con api de yahoo.
+- [x] Logica de conversion de divisas offline
+- [x] Logica de conversion de divisas online con api de ~~yahoo~~ fixer.io.
 - [x] Logica de conversion de temperaturas
-- [ ] Funcionalidad de conversor de temperaturas
+- [x] Funcionalidad de conversor de temperaturas
