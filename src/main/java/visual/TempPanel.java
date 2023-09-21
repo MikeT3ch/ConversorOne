@@ -53,6 +53,7 @@ public class TempPanel extends JPanel {
 		btnConvertirTemp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
+					lblLblerror.setText("");
 					String unit = combBoxInputTemp.getSelectedItem() + "to" + combBoxOutTemp.getSelectedItem();
 					double temp = Double.parseDouble(inputTemp.getText());
 					
@@ -61,8 +62,8 @@ public class TempPanel extends JPanel {
 					outputTemp.setText(String.valueOf(String.format("%.2f", answer)));
 				} catch (Exception e) {
 					e.printStackTrace();
-					System.out.println("No es un numero valido");
-					lblLblerror.setText("Numero invalido");
+					System.out.println("Valor invalido");
+					lblLblerror.setText("Valor invalido");
 				}
 			}
 		});

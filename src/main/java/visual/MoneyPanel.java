@@ -16,6 +16,7 @@ import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JCheckBox;
+import java.awt.Color;
 
 @SuppressWarnings("serial")
 public class MoneyPanel extends JPanel {
@@ -39,6 +40,9 @@ public class MoneyPanel extends JPanel {
 		textOutMoney.setEditable(false);
 		textOutMoney.setColumns(10);
 		
+		final JLabel lblLblerror = new JLabel("");
+		lblLblerror.setForeground(new Color(252, 72, 79));
+		
 		final JComboBox combBoxInputMoney = new JComboBox();
 		combBoxInputMoney.setModel(new DefaultComboBoxModel(new String[] {"COP", "USD", "EUR", "CHIL", "ARG"}));
 		
@@ -54,17 +58,28 @@ public class MoneyPanel extends JPanel {
 		JButton btnConvertirMoney = new JButton("Convertir");
 		btnConvertirMoney.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String from = String.valueOf(combBoxInputMoney.getSelectedItem());
-				String to = String.valueOf(combBoxOutMoney.getSelectedItem());
-				double amount = Double.parseDouble(txtInputMoney.getText());
-				Boolean offline = chckbxUsarModoOffline.isSelected();
 				
-				CurrencyConverter converter = new CurrencyConverter();
-				double answer = converter.doConvertion(from, to, amount, offline);
-				textOutMoney.setText(String.format("%.2f" ,answer));
+				try {
+					lblLblerror.setText("");
+					String from = String.valueOf(combBoxInputMoney.getSelectedItem());
+					String to = String.valueOf(combBoxOutMoney.getSelectedItem());
+					double amount = Double.parseDouble(txtInputMoney.getText());
+					Boolean offline = chckbxUsarModoOffline.isSelected();
+					
+					CurrencyConverter converter = new CurrencyConverter();
+					double answer = converter.doConvertion(from, to, amount, offline);
+					textOutMoney.setText(String.format("%.2f" ,answer));
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+					System.out.println("Valor invalido");
+					lblLblerror.setText("Valor invalido");
+				}
 			}
 		});
 		btnConvertirMoney.setBorderPainted(false);
+		
+		
 		
 		
 		
@@ -93,6 +108,10 @@ public class MoneyPanel extends JPanel {
 							.addComponent(btnConvertirMoney, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE)
 							.addGap(204)))
 					.addGap(61))
+				.addGroup(Alignment.LEADING, gl_moneyPane.createSequentialGroup()
+					.addGap(279)
+					.addComponent(lblLblerror)
+					.addContainerGap(279, Short.MAX_VALUE))
 		);
 		gl_moneyPane.setVerticalGroup(
 			gl_moneyPane.createParallelGroup(Alignment.LEADING)
@@ -115,7 +134,9 @@ public class MoneyPanel extends JPanel {
 						.addComponent(textOutMoney, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(33)
 					.addComponent(btnConvertirMoney, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(68, Short.MAX_VALUE))
+					.addGap(18)
+					.addComponent(lblLblerror)
+					.addContainerGap(33, Short.MAX_VALUE))
 		);
 		moneyPane.setLayout(gl_moneyPane);
 
