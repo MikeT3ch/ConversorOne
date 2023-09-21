@@ -4,6 +4,9 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
+
+import logic.TempConverter2;
+
 import java.awt.Dimension;
 import javax.swing.JButton;
 import javax.swing.GroupLayout;
@@ -14,7 +17,7 @@ import java.awt.event.ActionEvent;
 
 public class TempPanel extends JPanel {
 	private JTextField inputTemp;
-	private JTextField textField_1;
+	private JTextField outputTemp;
 
 	/**
 	 * Create the panel.
@@ -28,27 +31,34 @@ public class TempPanel extends JPanel {
 		
 		JLabel lblTo = new JLabel("To:");
 		
-		JComboBox combBoxInputTemp = new JComboBox();
-		combBoxInputTemp.setModel(new DefaultComboBoxModel(new String[] {"C°", "F°", "K°"}));
-		
 		inputTemp = new JTextField();
 		inputTemp.setColumns(10);
 		
-		JComboBox combBoxOutTemp = new JComboBox();
+		outputTemp = new JTextField();
+		outputTemp.setText("0");
+		outputTemp.setEditable(false);
+		outputTemp.setColumns(10);
+		
+		final JComboBox combBoxInputTemp = new JComboBox();
+		combBoxInputTemp.setModel(new DefaultComboBoxModel(new String[] {"C°", "F°", "K°"}));
+		
+		final JComboBox combBoxOutTemp = new JComboBox();
 		combBoxOutTemp.setModel(new DefaultComboBoxModel(new String[] {"F°", "K°", "C°"}));
 		
 		JButton btnConvertirTemp = new JButton("Convertir");
 		btnConvertirTemp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO
+				String unit = combBoxInputTemp.getSelectedItem() + "to" + combBoxOutTemp.getSelectedItem();
+				double temp = Double.parseDouble(inputTemp.getText());
+				
+				TempConverter2 converter = new TempConverter2();
+				double answer = converter.doTempConvert(temp, unit);
+				outputTemp.setText(String.valueOf(String.format("%.2f", answer)));
 			}
 		});
 		btnConvertirTemp.setBorderPainted(false);
 		
-		textField_1 = new JTextField();
-		textField_1.setText("0");
-		textField_1.setEditable(false);
-		textField_1.setColumns(10);
+		
 		GroupLayout gl_tempPane = new GroupLayout(tempPane);
 		gl_tempPane.setHorizontalGroup(
 			gl_tempPane.createParallelGroup(Alignment.LEADING)
@@ -65,7 +75,7 @@ public class TempPanel extends JPanel {
 						.addGroup(gl_tempPane.createSequentialGroup()
 							.addComponent(combBoxOutTemp, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
 							.addGap(18)
-							.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addComponent(outputTemp, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_tempPane.createSequentialGroup()
 							.addGap(108)
 							.addComponent(btnConvertirTemp, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE)))
@@ -87,7 +97,7 @@ public class TempPanel extends JPanel {
 						.addGroup(gl_tempPane.createSequentialGroup()
 							.addGap(1)
 							.addComponent(combBoxOutTemp, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-						.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(outputTemp, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(18)
 					.addComponent(btnConvertirTemp)
 					.addContainerGap(94, Short.MAX_VALUE))
