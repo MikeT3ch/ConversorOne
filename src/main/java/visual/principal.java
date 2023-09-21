@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.SwingPropertyChangeSupport;
 
 import org.w3c.dom.events.EventTarget;
 
@@ -15,12 +16,15 @@ import javax.swing.BoxLayout;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
 import javax.swing.SpringLayout;
 import javax.swing.UIManager;
+import javax.swing.ViewportLayout;
 
 import java.awt.Dimension;
 import java.awt.Rectangle;
@@ -65,8 +69,6 @@ public class principal extends JFrame {
 	JPanel viewsPanel = new JPanel();
 	int xMouse, yMouse;
 	public principal() {
-		inicializarDecoracion();
-		inicializarContenido();
 		
 		setUndecorated(true);
 		setResizable(false);
@@ -141,14 +143,8 @@ public class principal extends JFrame {
 		JButton btnDivisas = new JButton("Divisas");
 		btnDivisas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				MoneyPanel view = new MoneyPanel();
-				view.setBounds(0, 0, 600, 320);		
-		
-				viewsPanel.removeAll();
-				viewsPanel.setLayout(null);
-				viewsPanel.add(view);
-				viewsPanel.revalidate();
-				viewsPanel.repaint();
+				MoneyPanel moneyPanel = new MoneyPanel();
+				switchView(moneyPanel);
 			}
 		});
 		btnDivisas.setBorderPainted(false);
@@ -159,15 +155,8 @@ public class principal extends JFrame {
 		JButton btnTemperatura = new JButton("Temp");
 		btnTemperatura.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO
-				TempPanel view = new TempPanel();
-				view.setBounds(0, 0, 600, 320);		
-		
-				viewsPanel.removeAll();
-				viewsPanel.setLayout(null);
-				viewsPanel.add(view);
-				viewsPanel.revalidate();
-				viewsPanel.repaint();
+				TempPanel tempPanel = new TempPanel();
+				switchView(tempPanel);
 			}
 		});
 		btnTemperatura.setBorderPainted(false);
@@ -176,12 +165,30 @@ public class principal extends JFrame {
 		panelSide.add(btnTemperatura);
 		
 		JButton btnDistancia = new JButton("Distancia");
+		btnDistancia.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				WorkInProgress wipPanel = new WorkInProgress();
+				switchView(wipPanel);
+			}
+		});
 		btnDistancia.setBackground(new Color(193, 225, 145));
 		btnDistancia.setBorderPainted(false);
 		btnDistancia.setForeground(new Color(0, 0, 0));
 		panelSide.add(btnDistancia);
 		
 		JButton btnMore = new JButton("Mas");
+		btnMore.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				WorkInProgress view = new WorkInProgress();
+				view.setBounds(0, 0, 600, 320);
+				
+				viewsPanel.removeAll();
+				viewsPanel.setLayout(null);
+				viewsPanel.add(view);
+				viewsPanel.revalidate();
+				viewsPanel.repaint();
+			}
+		});
 		btnMore.setBackground(new Color(193, 225, 145));
 		btnMore.setBorderPainted(false);
 		btnMore.setForeground(new Color(0, 0, 0));
@@ -194,13 +201,18 @@ public class principal extends JFrame {
 			}
 		});
 	}
-	private void inicializarContenido() {
-		// TODO Auto-generated method stub
-		
-	}
-	public void inicializarDecoracion() {
-		// TODO Auto-generated method stub
-		
-		
+	
+	public void switchView(JPanel view) {
+		try {
+			view.setBounds(0, 0, 600, 320);
+			
+			viewsPanel.removeAll();
+			viewsPanel.setLayout(null);
+			viewsPanel.add(view);
+			viewsPanel.revalidate();
+			viewsPanel.repaint();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 	}
 }
