@@ -96,6 +96,7 @@ public class principal extends JFrame {
 		viewsPanel.repaint();
 		
 		JPanel panelTitle = new JPanel();
+		panelTitle.setBackground(new Color(222, 221, 218));
 		panelTitle.setBounds(0, 0, 700, 30);
 		contentPane.add(panelTitle);
 		panelTitle.addMouseMotionListener(new MouseMotionAdapter() {
