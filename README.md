@@ -9,6 +9,12 @@ El conversor de divisas cuanta con un checkbox que activa el modo offline, este 
 
 El conversor de temperaturas no necesita una conexión a internet.
 
+Para ejecutar un archivo jar desde la terminal asegurate de tener instalado Java 17 o mayor, y usa el siguiente comando:
+
+```bash
+java -jar NombreDeArchivo.jar
+```
+
 ## Screenshots
 ### Ventana principal:
 ![MainView](./screenshots/MainView.png) 
